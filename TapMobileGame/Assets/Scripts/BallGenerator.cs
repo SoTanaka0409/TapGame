@@ -20,7 +20,8 @@ public class BallGenerator : MonoBehaviour
 
             // X座標を -2.0 ～ 2.0 の間でランダムに決める
             float randomX = Random.Range(-2.0f, 2.0f);
-            Vector3 spawnPos = new Vector3(randomX, 4.0f, 0);
+            float randomY = Random.Range(-2.0f, 2.0f);
+            Vector3 spawnPos = new Vector3(randomX, randomY, 0);
 
             // プレハブが1つ以上登録されている場合のみ生成する
             if (ballPrefabs != null && ballPrefabs.Length > 0)
