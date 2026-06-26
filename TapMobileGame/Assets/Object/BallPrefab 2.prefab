@@ -135,3 +135,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointValue: 10
   lifetime: 1
+  effectPrefab: {fileID: 8128966769814368481, guid: 8e283d9362fd89345b1083b9f1d8704f, type: 3}
