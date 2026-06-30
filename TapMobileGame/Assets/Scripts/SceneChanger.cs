@@ -6,6 +6,8 @@ public class SceneChanger : MonoBehaviour
     // ボタンが押されたときに呼ばれるメソッド
     public void GoToGameScene()
     {
-        SceneManager.LoadScene("Game");
+        FadeController fade = FindObjectOfType<FadeController>();
+        if (fade != null) fade.FadeOutAndLoad("Game");
+        else SceneManager.LoadScene("Game");
     }
 }

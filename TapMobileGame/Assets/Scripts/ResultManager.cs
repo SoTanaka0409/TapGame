@@ -17,6 +17,8 @@ public class ResultManager : MonoBehaviour
 
     public void RetryGame()
     {
-        SceneManager.LoadScene("Title");
+        FadeController fade = FindObjectOfType<FadeController>();
+        if (fade != null) fade.FadeOutAndLoad("Title");
+        else SceneManager.LoadScene("Title");
     }
 }

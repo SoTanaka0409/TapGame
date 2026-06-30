@@ -14,9 +14,30 @@ public class BallGenerator : MonoBehaviour
     void Update()
     {
         this.delta += Time.deltaTime;
-        if (this.delta > this.span)
+
+        // 🌟 焦らせるための追加コード：タイマーを取得する
+        GameTimer timer = FindObjectOfType<GameTimer>();
+        
+        // 基本の出現ペース
+        float currentSpan = this.span;
+
+        if (timer != null)
         {
-            this.delta = 0; // タイマーをリセット
+            // 残り時間に応じて出現ペースをどんどん速くする！
+            if (timer.timeLimit <= 10.0f)
+            {
+                currentSpan = 0.4f; // 残り10秒以下：0.2秒に1個（猛吹雪モード！）
+            }
+            else if (timer.timeLimit <= 20.0f)
+            {
+                currentSpan = 0.7f; // 残り20秒以下：0.5秒に1個（少し焦る）
+            }
+        }
+
+        // 基本のspanではなく、計算したcurrentSpanを使う
+        if (this.delta > currentSpan)
+        {
+            this.delta = 0; // タイマーをリセットット
 
             // X座標を -2.0 ～ 2.0 の間でランダムに決める
             float randomX = Random.Range(-2.0f, 2.0f);
