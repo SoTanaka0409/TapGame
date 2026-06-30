@@ -542,6 +542,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballPrefabs:
   - {fileID: 692231504904858312, guid: 5e6577d082286834db36d502244394a7, type: 3}
+  - {fileID: 692231504904858312, guid: 317e3713452c7914d8206cca2853e9b4, type: 3}
+  - {fileID: 692231504904858312, guid: 56bcf1e09a545d1438d07fd64ece4d7a, type: 3}
   span: 1
 --- !u!4 &1473861202
 Transform:
@@ -635,7 +637,7 @@ MonoBehaviour:
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
-    m_MaxSize: 40
+    m_MaxSize: 80
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1

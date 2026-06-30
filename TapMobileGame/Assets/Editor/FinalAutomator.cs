@@ -12,7 +12,7 @@ public class FinalAutomator
         // ------------------------
         // 1. ResultScene の構築
         // ------------------------
-        EditorSceneManager.OpenScene("Assets/Scenes/ResultScene.unity");
+        EditorSceneManager.OpenScene("Assets/Scenes/Result.unity");
         SetupCanvas(out Canvas resCanvas);
         RemoveBackground();
         SetCameraColor();
@@ -30,7 +30,7 @@ public class FinalAutomator
         // ------------------------
         // 2. TitleScene の構築
         // ------------------------
-        EditorSceneManager.OpenScene("Assets/Scenes/TitleSecne.unity");
+        EditorSceneManager.OpenScene("Assets/Scenes/Title.unity");
         SetupCanvas(out Canvas titleCanvas);
         RemoveBackground();
         SetCameraColor();
@@ -47,7 +47,7 @@ public class FinalAutomator
         // ------------------------
         // 3. GameScene の構築
         // ------------------------
-        EditorSceneManager.OpenScene("Assets/Scenes/GameScene.unity");
+        EditorSceneManager.OpenScene("Assets/Scenes/Game.unity");
         SetupCanvas(out Canvas gameCanvas);
         RemoveBackground();
         SetCameraColor();

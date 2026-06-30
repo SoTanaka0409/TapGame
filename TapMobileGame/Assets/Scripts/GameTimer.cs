@@ -25,7 +25,7 @@ public class GameTimer : MonoBehaviour
                 PlayerPrefs.Save();
             }
 
-            SceneManager.LoadScene("ResultScene");
+            SceneManager.LoadScene("Result");
         }
     }
 }

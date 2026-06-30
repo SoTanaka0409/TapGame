@@ -6,7 +6,6 @@ public class SceneChanger : MonoBehaviour
     // ボタンが押されたときに呼ばれるメソッド
     public void GoToGameScene()
     {
-        // "GameScene" という名前のシーンを読み込んで移動する
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("Game");
     }
 }

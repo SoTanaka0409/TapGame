@@ -17,6 +17,6 @@ public class ResultManager : MonoBehaviour
 
     public void RetryGame()
     {
-        SceneManager.LoadScene("TitleSecne");
+        SceneManager.LoadScene("Title");
     }
 }
