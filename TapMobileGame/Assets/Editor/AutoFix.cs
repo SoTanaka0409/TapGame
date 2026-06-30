@@ -84,7 +84,7 @@ public class AutoFix
         {
             bg = genObj.AddComponent<BallGenerator>();
         }
-        bg.ballPrefab = prefab;
+        bg.ballPrefabs = new GameObject[] { prefab };
 
         // 6. 今開いているシーンを保存
         EditorSceneManager.MarkSceneDirty(activeScene);
