@@ -15,8 +15,17 @@ public class ResultManager : MonoBehaviour
         }
     }
 
+    // 鳴らしたいボタン音（SE）を入れる枠
+    public AudioClip buttonSound;
+
     public void RetryGame()
     {
+        // 音が設定されていれば、カメラの位置（大音量）で一瞬だけ鳴らす
+        if (buttonSound != null)
+        {
+            AudioSource.PlayClipAtPoint(buttonSound, Camera.main.transform.position);
+        }
+
         FadeController fade = FindObjectOfType<FadeController>();
         if (fade != null) fade.FadeOutAndLoad("Title");
         else SceneManager.LoadScene("Title");
