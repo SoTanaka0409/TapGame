@@ -135,5 +135,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointValue: 20
   lifetime: 1
-  popSound: {fileID: 0}
+  popSound: {fileID: 8300000, guid: 9c2871114583571468edfdd7859c83ef, type: 3}
   effectPrefab: {fileID: 8128966769814368481, guid: 8e283d9362fd89345b1083b9f1d8704f, type: 3}

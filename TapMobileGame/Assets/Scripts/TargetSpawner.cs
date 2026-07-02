@@ -17,11 +17,13 @@ public class TargetSpawner : MonoBehaviour
     [SerializeField, Tooltip("残り20秒以下になった際の生成間隔（秒）")]
     private float cautionSpawnInterval = 0.8f;
 
+    //objectのスポーン位置とそれらが出る感覚を定める時間
     private const float WarningTimeThreshold = 10.0f;
     private const float CautionTimeThreshold = 20.0f;
     private const float SpawnAreaMin = -2.0f;
     private const float SpawnAreaMax = 2.0f;
 
+    //spawn時間の初期化
     private float spawnTimer = 0f;
 
     private void Update()
@@ -48,6 +50,7 @@ public class TargetSpawner : MonoBehaviour
 
         if (timer != null)
         {
+            
             if (timer.CurrentTimeLimit <= WarningTimeThreshold)
             {
                 interval = frenzySpawnInterval;

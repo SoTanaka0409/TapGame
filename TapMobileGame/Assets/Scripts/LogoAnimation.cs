@@ -16,6 +16,7 @@ public class LogoAnimation : MonoBehaviour
     {
         // Mathf.Sin ‚Åã‰º‚É‚ä‚Á‚­‚è—h‚ê‚é
         float y = Mathf.Sin(Time.time * 2.0f) * 10f;
+
         transform.localPosition = new Vector3(
             transform.localPosition.x,
            startY + y,  // startY‚Í‰ŠúYÀ•W

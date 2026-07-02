@@ -14,6 +14,7 @@ public class FadeController : MonoBehaviour
     [SerializeField, Tooltip("フェードにかかる時間（秒）")]
     private float fadeDuration = 1.0f;
 
+    //fadeのon.off
     private bool isFading = false;
 
     private void Start()
