@@ -1,34 +1,46 @@
 using UnityEngine;
-using UnityEngine.UI; // UIを扱うために必要
+using UnityEngine.UI;
 
+/// <summary>
+/// プレイ中のスコア加算処理およびUI表示の更新を管理するクラス
+/// </summary>
 public class ScoreManager : MonoBehaviour
 {
-    public int score = 0;        // 現在のスコア
-    public Text scoreText;       // スコアを表示するUIテキスト
+    [SerializeField, Tooltip("スコアを表示するUIテキスト")]
+    private Text scoreText;
 
-    void Start()
+    /// <summary>
+    /// 現在のスコア値（外部からは取得のみ可能）
+    /// </summary>
+    public int CurrentScore { get; private set; } = 0;
+
+    private void Start()
     {
-        // 最初は0点を表示する
         UpdateScoreText();
     }
 
-    // スコアを増やすメソッド
+    /// <summary>
+    /// ターゲットをタップした際にスコアを加算する
+    /// </summary>
+    /// <param name="amount">加算する点数</param>
     public void AddScore(int amount)
     {
-        score += amount;
+        CurrentScore += amount;
         UpdateScoreText();
     }
 
-    // 画面のテキストを更新するメソッド
+    /// <summary>
+    /// 内部のスコア値を元にUIテキストの表示を更新する
+    /// </summary>
     private void UpdateScoreText()
     {
         if (scoreText != null)
         {
-            scoreText.text = "Score: " + score;
+            scoreText.text = $"Score: {CurrentScore}";
         }
         else
         {
-            Debug.LogWarning("ScoreTextが設定されていません！");
+            Debug.LogWarning("ScoreManager: ScoreTextがアタッチされていません。");
         }
     }
 }
