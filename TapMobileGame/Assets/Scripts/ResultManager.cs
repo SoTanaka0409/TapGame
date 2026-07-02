@@ -13,6 +13,9 @@ public class ResultManager : MonoBehaviour
     [SerializeField, Tooltip("リトライボタン押下時に再生するSE")]
     private AudioClip buttonSound;
 
+    [SerializeField, Tooltip("リトライボタン押下時に生成するエフェクトのプレハブ")]
+    private GameObject clickEffectPrefab;
+
     private void Start()
     {
         DisplayFinalScore();
@@ -38,6 +41,15 @@ public class ResultManager : MonoBehaviour
         if (buttonSound != null)
         {
             AudioSource.PlayClipAtPoint(buttonSound, Camera.main.transform.position);
+        }
+
+        if (clickEffectPrefab != null)
+        {
+            // マウス（またはタップ）された位置にエフェクトを生成
+            Vector3 clickPos = Input.mousePosition;
+            clickPos.z = 10f; // カメラからの距離
+            Vector3 worldPos = Camera.main.ScreenToWorldPoint(clickPos);
+            Instantiate(clickEffectPrefab, worldPos, Quaternion.identity);
         }
 
         FadeController fade = FindObjectOfType<FadeController>();

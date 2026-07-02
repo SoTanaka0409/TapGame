@@ -530,6 +530,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonSound: {fileID: 8300000, guid: 5e6429fbc9152f24385c19cf9c16f7c3, type: 3}
+  clickEffectPrefab: {fileID: 8128966769814368481, guid: 8e283d9362fd89345b1083b9f1d8704f, type: 3}
 --- !u!1 &1252384184
 GameObject:
   m_ObjectHideFlags: 0
@@ -632,6 +633,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   finalScoreText: {fileID: 1905721086}
   buttonSound: {fileID: 8300000, guid: 5e6429fbc9152f24385c19cf9c16f7c3, type: 3}
+  clickEffectPrefab: {fileID: 8128966769814368481, guid: 8e283d9362fd89345b1083b9f1d8704f, type: 3}
 --- !u!114 &1507526005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -681,7 +683,7 @@ Canvas:
   m_GameObject: {fileID: 1507526003}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
