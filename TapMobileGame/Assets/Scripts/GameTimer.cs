@@ -1,49 +1,82 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
+/// <summary>
+/// ゲームの制限時間を管理し、時間切れ時のリザルト画面遷移を行うクラス
+/// </summary>
 public class GameTimer : MonoBehaviour
 {
-    public float timeLimit = 30.0f;
-    public Text timerText;
+    [SerializeField, Tooltip("ゲームの制限時間（秒）")]
+    private float timeLimit = 30.0f;
+
+    [SerializeField, Tooltip("残り時間を表示するUIテキスト")]
+    private Text timerText;
+
+    [SerializeField, Tooltip("タイマーが赤く点滅し始める残り時間（秒）")]
+    private float warningTimeThreshold = 10.0f;
+
+    /// <summary>
+    /// 現在の残り時間を外部から取得するためのプロパティ
+    /// </summary>
+    public float CurrentTimeLimit => timeLimit;
+
     private bool isEnded = false;
 
-    void Update()
+    private void Update()
     {
+        if (isEnded) return;
+
         timeLimit -= Time.deltaTime;
+        UpdateTimerUI();
 
-        if (timerText != null)
+        if (timeLimit <= 0)
         {
-            timerText.text = "Time: " + Mathf.Max(0, timeLimit).ToString("F1");
+            EndGame();
+        }
+    }
 
-            // 残り10秒以下になったら躍動させる
-            if (timeLimit <= 10.0f)
-            {
-                // 文字を警告の赤色にする
-                timerText.color = Color.red;
+    /// <summary>
+    /// UIテキストの更新および、残り時間が少ない場合の演出（警告色・振動）を処理する
+    /// </summary>
+    private void UpdateTimerUI()
+    {
+        if (timerText == null) return;
 
-                // Mathf.Sin() を使って、波のように数字を上下させる
-                float wave = Mathf.Abs(Mathf.Sin(Time.time * 10f));
-                float scale = 1.0f + (wave * 0.5f);
-                
-                // 実際に文字の大きさを変更する
-                timerText.transform.localScale = new Vector3(scale, scale, 1.0f);
-            }
+        timerText.text = $"Time: {Mathf.Max(0, timeLimit):F1}";
+
+        if (timeLimit <= warningTimeThreshold)
+        {
+            timerText.color = Color.red;
+
+            // 波打つようなスケールアニメーションでプレイヤーに切迫感を与える
+            float wave = Mathf.Abs(Mathf.Sin(Time.time * 10f));
+            float scale = 1.0f + (wave * 0.5f);
+            timerText.transform.localScale = new Vector3(scale, scale, 1.0f);
+        }
+    }
+
+    /// <summary>
+    /// 制限時間到達時の終了処理（スコア保存とリザルトシーンへの遷移）を行う
+    /// </summary>
+    private void EndGame()
+    {
+        isEnded = true; 
+
+        ScoreManager sm = FindObjectOfType<ScoreManager>();
+        if (sm != null)
+        {
+            PlayerPrefs.SetInt("FinalScore", sm.CurrentScore);
+            PlayerPrefs.Save();
         }
 
-        if (timeLimit <= 0 && !isEnded)
+        FadeController fade = FindObjectOfType<FadeController>();
+        if (fade != null) 
         {
-            isEnded = true; // 1回だけ実行するようにフラグを立てる
-            ScoreManager sm = FindObjectOfType<ScoreManager>();
-            if (sm != null)
-            {
-                PlayerPrefs.SetInt("FinalScore", sm.score);
-                PlayerPrefs.Save();
-            }
-
-            FadeController fade = FindObjectOfType<FadeController>();
-            if (fade != null) fade.FadeOutAndLoad("Result");
-            else SceneManager.LoadScene("Result");
+            fade.FadeOutAndLoad("Result");
+        }
+        else 
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Result");
         }
     }
 }

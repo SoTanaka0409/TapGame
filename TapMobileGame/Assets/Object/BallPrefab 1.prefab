@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2682328547459943648}
   - component: {fileID: 6994910567444904601}
   - component: {fileID: 5882214987008823237}
-  - component: {fileID: 9157998211468192403}
+  - component: {fileID: 7324269756788815376}
   m_Layer: 0
   m_Name: BallPrefab 1
   m_TagString: Untagged
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 08d8defb1a44f6e41ad7f222aee13965, type: 3}
-  m_Color: {r: 0.1768818, g: 0.9811321, b: 0.06016379, a: 1}
+  m_Color: {r: 0.31719473, g: 0.6792453, b: 0.4258099, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -121,7 +121,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.64
---- !u!114 &9157998211468192403
+--- !u!114 &7324269756788815376
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,10 +130,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 692231504904858312}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93fece81beba5e74a95156f8f90c133f, type: 3}
+  m_Script: {fileID: 11500000, guid: a347a4d4dcd357d419b94f3fbb28d0de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pointValue: 20
   lifetime: 1
-  PopSound: {fileID: 8300000, guid: ab31d575e5c0f7d4586ae9c7c3efb003, type: 3}
+  popSound: {fileID: 0}
   effectPrefab: {fileID: 8128966769814368481, guid: 8e283d9362fd89345b1083b9f1d8704f, type: 3}

@@ -1,22 +1,32 @@
 using UnityEngine;
-using UnityEngine.SceneManagement; // シーン移動に必須
+using UnityEngine.SceneManagement;
 
+/// <summary>
+/// タイトル画面などから別のシーンへ遷移する処理を管理するクラス
+/// </summary>
 public class SceneChanger : MonoBehaviour
 {
-    // 鳴らしたいボタン音（SE）を入れる枠
-    public AudioClip buttonSound;
+    [SerializeField, Tooltip("ボタン押下時に再生するSE")]
+    private AudioClip buttonSound;
 
-    // ボタンが押されたときに呼ばれるメソッド
+    /// <summary>
+    /// メインゲームシーンへの遷移処理を開始する
+    /// </summary>
     public void GoToGameScene()
     {
-        // 音が設定されていれば、カメラの位置（大音量）で一瞬だけ鳴らす
         if (buttonSound != null)
         {
             AudioSource.PlayClipAtPoint(buttonSound, Camera.main.transform.position);
         }
 
         FadeController fade = FindObjectOfType<FadeController>();
-        if (fade != null) fade.FadeOutAndLoad("Game");
-        else SceneManager.LoadScene("Game");
+        if (fade != null) 
+        {
+            fade.FadeOutAndLoad("Game");
+        }
+        else 
+        {
+            SceneManager.LoadScene("Game");
+        }
     }
 }

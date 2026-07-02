@@ -2,32 +2,52 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// リザルト画面における最終スコア表示とリトライ処理を管理するクラス
+/// </summary>
 public class ResultManager : MonoBehaviour
 {
-    public Text finalScoreText;
+    [SerializeField, Tooltip("最終スコアを表示するUIテキスト")]
+    private Text finalScoreText;
 
-    void Start()
+    [SerializeField, Tooltip("リトライボタン押下時に再生するSE")]
+    private AudioClip buttonSound;
+
+    private void Start()
+    {
+        DisplayFinalScore();
+    }
+
+    /// <summary>
+    /// PlayerPrefsから保存されたスコアを読み込み、UIに表示する
+    /// </summary>
+    private void DisplayFinalScore()
     {
         if (finalScoreText != null)
         {
             int score = PlayerPrefs.GetInt("FinalScore", 0);
-            finalScoreText.text = "最終スコア:\n" + score + " 点";
+            finalScoreText.text = $"最終スコア:\n{score} 点";
         }
     }
 
-    // 鳴らしたいボタン音（SE）を入れる枠
-    public AudioClip buttonSound;
-
+    /// <summary>
+    /// タイトル画面へ戻るリトライ処理を開始する
+    /// </summary>
     public void RetryGame()
     {
-        // 音が設定されていれば、カメラの位置（大音量）で一瞬だけ鳴らす
         if (buttonSound != null)
         {
             AudioSource.PlayClipAtPoint(buttonSound, Camera.main.transform.position);
         }
 
         FadeController fade = FindObjectOfType<FadeController>();
-        if (fade != null) fade.FadeOutAndLoad("Title");
-        else SceneManager.LoadScene("Title");
+        if (fade != null) 
+        {
+            fade.FadeOutAndLoad("Title");
+        }
+        else 
+        {
+            SceneManager.LoadScene("Title");
+        }
     }
 }

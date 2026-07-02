@@ -3,58 +3,78 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// シーン遷移時のフェードイン・フェードアウト演出を管理するクラス
+/// </summary>
 public class FadeController : MonoBehaviour
 {
-    public Image fadeImage;       // 手順1で作った黒いImageを入れる
-    public float fadeTime = 1.0f; // フェードにかかる秒数
+    [SerializeField, Tooltip("フェード演出用の画面全体を覆う黒いImage")]
+    private Image fadeImage;
 
-    void Start()
+    [SerializeField, Tooltip("フェードにかかる時間（秒）")]
+    private float fadeDuration = 1.0f;
+
+    private bool isFading = false;
+
+    private void Start()
     {
-        // シーンが始まったら、自動で「フェードイン（黒から透明へ）」する
-        StartCoroutine(FadeIn());
+        StartCoroutine(FadeInRoutine());
     }
 
-    IEnumerator FadeIn()
+    /// <summary>
+    /// シーン開始時のフェードイン（黒から透明）アニメーションを実行する
+    /// </summary>
+    private IEnumerator FadeInRoutine()
     {
-        fadeImage.raycastTarget = true; // 透明になるまでタップをブロック
+        if (fadeImage == null) yield break;
 
+        fadeImage.raycastTarget = true; 
         float time = 0;
-        while (time < fadeTime)
+
+        while (time < fadeDuration)
         {
             time += Time.deltaTime;
-            float alpha = 1.0f - (time / fadeTime); // 1から0へ減らす
+            float alpha = 1.0f - (time / fadeDuration);
             fadeImage.color = new Color(0, 0, 0, alpha);
             yield return null;
         }
 
-        // 完全に透明になったら、裏のボタンを押せるようにブロック解除
+        fadeImage.color = new Color(0, 0, 0, 0);
         fadeImage.raycastTarget = false;
     }
 
-    // 次のシーンへ行きたい時にこれを呼ぶ
-    private bool isFading = false;
-
+    /// <summary>
+    /// フェードアウト演出を行い、完了後に指定されたシーンへ遷移する
+    /// </summary>
+    /// <param name="nextSceneName">遷移先のシーン名</param>
     public void FadeOutAndLoad(string nextSceneName)
     {
-        if (isFading) return; // すでにフェード中なら無視する
+        if (isFading) return; 
         isFading = true;
-        StartCoroutine(FadeOut(nextSceneName));
+        StartCoroutine(FadeOutRoutine(nextSceneName));
     }
 
-    IEnumerator FadeOut(string sceneName)
+    /// <summary>
+    /// フェードアウト（透明から黒）アニメーションを実行し、シーンをロードする
+    /// </summary>
+    private IEnumerator FadeOutRoutine(string sceneName)
     {
-        fadeImage.raycastTarget = true; // タップをブロック
-        float time = 0;
-
-        while (time < fadeTime)
+        if (fadeImage != null)
         {
-            time += Time.deltaTime;
-            float alpha = time / fadeTime; // 0から1へ増やす
-            fadeImage.color = new Color(0, 0, 0, alpha);
-            yield return null;
+            fadeImage.raycastTarget = true;
+            float time = 0;
+
+            while (time < fadeDuration)
+            {
+                time += Time.deltaTime;
+                float alpha = time / fadeDuration;
+                fadeImage.color = new Color(0, 0, 0, alpha);
+                yield return null;
+            }
+
+            fadeImage.color = new Color(0, 0, 0, 1);
         }
 
-        // 完全に真っ黒になったら、次のシーンを読み込む
         SceneManager.LoadScene(sceneName);
     }
 }

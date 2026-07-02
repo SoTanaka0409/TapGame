@@ -158,7 +158,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.15, g: 0.2, b: 0.3, a: 1}
+  m_BackGroundColor: {r: 0.4245283, g: 0.39449093, b: 0.39636913, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -617,6 +617,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   finalScoreText: {fileID: 1905721086}
+  buttonSound: {fileID: 0}
 --- !u!114 &1507526005
 MonoBehaviour:
   m_ObjectHideFlags: 0
