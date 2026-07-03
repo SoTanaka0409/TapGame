@@ -13,8 +13,8 @@ public class AutoRepairOnCompile
 
     private static void RunRepair()
     {
-        if (SessionState.GetBool("AutoRepairDone", false)) return;
-        SessionState.SetBool("AutoRepairDone", true);
+        if (SessionState.GetBool("AutoRepairDone3", false)) return;
+        SessionState.SetBool("AutoRepairDone3", true);
 
         Debug.Log("AutoRepairOnCompile 実行中...");
         
@@ -86,7 +86,7 @@ public class AutoRepairOnCompile
                 
                 SerializedObject so = new SerializedObject(ctrl);
                 so.Update();
-                so.FindProperty("pointValue").intValue = 10;
+                // so.FindProperty("pointValue").intValue = 10; // 毎回10にリセットするのをやめる
                 so.FindProperty("lifetime").floatValue = 1.0f;
                 if (effect != null) so.FindProperty("effectPrefab").objectReferenceValue = effect;
                 so.ApplyModifiedProperties();

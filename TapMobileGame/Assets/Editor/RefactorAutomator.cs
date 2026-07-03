@@ -67,7 +67,7 @@ public class RefactorAutomator
 
             SerializedObject so = new SerializedObject(controller);
             so.Update();
-            so.FindProperty("pointValue").intValue = 10;
+            // so.FindProperty("pointValue").intValue = 10; // 毎回10にリセットするのをやめる
             so.FindProperty("lifetime").floatValue = 1.0f;
             if (effect != null) so.FindProperty("effectPrefab").objectReferenceValue = effect;
             so.ApplyModifiedProperties();
