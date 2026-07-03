@@ -32,7 +32,7 @@ public class RefactorAutomator
             }
             
             // プレハブを割り当て
-            GameObject ballPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Object/BallPrefab.prefab");
+            GameObject ballPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Object/Ball/BallPrefab.prefab");
             if (ballPrefab != null)
             {
                 SerializedObject so = new SerializedObject(spawner);
@@ -47,7 +47,7 @@ public class RefactorAutomator
         EditorSceneManager.SaveScene(gameScene);
 
         // 2. プレハブのスクリプト差し替え
-        string prefabPath = "Assets/Object/BallPrefab.prefab";
+        string prefabPath = "Assets/Object/Ball/BallPrefab.prefab";
         GameObject prefabObj = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
         if (prefabObj != null)
         {

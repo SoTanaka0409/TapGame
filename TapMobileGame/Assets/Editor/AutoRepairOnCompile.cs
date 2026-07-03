@@ -13,8 +13,8 @@ public class AutoRepairOnCompile
 
     private static void RunRepair()
     {
-        if (SessionState.GetBool("AutoRepairDone", false)) return;
-        SessionState.SetBool("AutoRepairDone", true);
+        if (SessionState.GetBool("AutoRepairDone2", false)) return;
+        SessionState.SetBool("AutoRepairDone2", true);
 
         Debug.Log("AutoRepairOnCompile 実行中...");
         
@@ -34,9 +34,9 @@ public class AutoRepairOnCompile
             if (spawner == null) spawner = generatorObj.AddComponent<TargetSpawner>();
             
             // プレハブ配列の再設定
-            GameObject ballPrefab1 = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Object/BallPrefab.prefab");
-            GameObject ballPrefab2 = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Object/BallPrefab 1.prefab");
-            GameObject ballPrefab3 = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Object/BallPrefab 2.prefab");
+            GameObject ballPrefab1 = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Object/Ball/BallPrefab.prefab");
+            GameObject ballPrefab2 = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Object/Ball/BallPrefab 1.prefab");
+            GameObject ballPrefab3 = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Object/Ball/BallPrefab 2.prefab");
 
             SerializedObject so = new SerializedObject(spawner);
             so.Update();
@@ -66,9 +66,9 @@ public class AutoRepairOnCompile
 
         // 2. プレハブ自体のスクリプト修復
         string[] prefabPaths = {
-            "Assets/Object/BallPrefab.prefab",
-            "Assets/Object/BallPrefab 1.prefab",
-            "Assets/Object/BallPrefab 2.prefab"
+            "Assets/Object/Ball/BallPrefab.prefab",
+            "Assets/Object/Ball/BallPrefab 1.prefab",
+            "Assets/Object/Ball/BallPrefab 2.prefab"
         };
 
         foreach (var path in prefabPaths)
