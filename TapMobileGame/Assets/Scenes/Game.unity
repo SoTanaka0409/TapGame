@@ -757,10 +757,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bc558070bb7c574383e2ac3888398c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetPrefabs:
-  - {fileID: 692231504904858312, guid: 5e6577d082286834db36d502244394a7, type: 3}
-  - {fileID: 692231504904858312, guid: 317e3713452c7914d8206cca2853e9b4, type: 3}
-  - {fileID: 692231504904858312, guid: 56bcf1e09a545d1438d07fd64ece4d7a, type: 3}
+  targetPrefabs: []
   baseSpawnInterval: 1
   frenzySpawnInterval: 0.5
   cautionSpawnInterval: 0.8
