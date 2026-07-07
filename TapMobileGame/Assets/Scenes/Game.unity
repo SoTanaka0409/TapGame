@@ -745,6 +745,7 @@ MonoBehaviour:
   timeLimit: 30
   timerText: {fileID: 1507526005}
   warningTimeThreshold: 10
+  gameFinishFlag: 0
 --- !u!114 &1473861204
 MonoBehaviour:
   m_ObjectHideFlags: 0
