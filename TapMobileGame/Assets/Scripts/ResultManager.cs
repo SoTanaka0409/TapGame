@@ -18,19 +18,27 @@ public class ResultManager : MonoBehaviour
 
     private void Start()
     {
-        DisplayFinalScore();
-    }
-
-    /// <summary>
-    /// PlayerPrefsから保存されたスコアを読み込み、UIに表示する
-    /// </summary>
-    private void DisplayFinalScore()
-    {
+        int score = PlayerPrefs.GetInt("FinalScore", 0);
         if (finalScoreText != null)
         {
-            int score = PlayerPrefs.GetInt("FinalScore", 0);
-            finalScoreText.text = $"最終スコア:\n{score} 点";
+            StartCoroutine(CountUpScore(score));
         }
+    }
+
+    private System.Collections.IEnumerator CountUpScore(int finalScore)
+    {
+        float time = 0;
+        float duration = 1.5f;
+
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            int current = Mathf.FloorToInt(Mathf.Lerp(0, finalScore, time / duration));
+            finalScoreText.text = $"最終スコア:\n{current} 点";
+            yield return null;
+        }
+
+        finalScoreText.text = $"最終スコア:\n{finalScore} 点";
     }
 
     /// <summary>

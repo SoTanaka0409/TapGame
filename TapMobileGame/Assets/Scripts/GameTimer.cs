@@ -15,6 +15,8 @@ public class GameTimer : MonoBehaviour
     [SerializeField, Tooltip("タイマーが赤く点滅し始める残り時間（秒）")]
     private float warningTimeThreshold = 10.0f;
 
+    public bool gameFinishFlag=false;
+
     /// <summary>
     /// 現在の残り時間を外部から取得するためのプロパティ
     /// </summary>
@@ -60,8 +62,8 @@ public class GameTimer : MonoBehaviour
     /// </summary>
     private void EndGame()
     {
-        isEnded = true; 
-
+        isEnded = true;
+        gameFinishFlag = true;
         ScoreManager sm = FindObjectOfType<ScoreManager>();
         if (sm != null)
         {

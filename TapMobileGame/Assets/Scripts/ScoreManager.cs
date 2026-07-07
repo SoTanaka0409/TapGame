@@ -25,8 +25,35 @@ public class ScoreManager : MonoBehaviour
     /// <param name="amount">加算する点数</param>
     public void AddScore(int amount)
     {
+        GameTimer timer = FindObjectOfType<GameTimer>();
+        if(timer != null )
+        {
+            if (timer.gameFinishFlag == true)
+            {
+                return;//timerg過ぎたら加点をなくす
+            }
+        }
         CurrentScore += amount;
         UpdateScoreText();
+        StartCoroutine(BounceAnimation());
+    }
+
+    private System.Collections.IEnumerator BounceAnimation()
+    {
+        if (scoreText == null) yield break;
+
+        Vector3 originalScale = Vector3.one;
+        scoreText.transform.localScale = originalScale * 1.5f;
+        
+        float time = 0;
+        float duration = 0.15f;
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            scoreText.transform.localScale = Vector3.Lerp(originalScale * 1.5f, originalScale, time / duration);
+            yield return null;
+        }
+        scoreText.transform.localScale = originalScale;
     }
 
     /// <summary>

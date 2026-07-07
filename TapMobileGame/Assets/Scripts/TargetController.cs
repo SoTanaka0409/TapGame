@@ -27,6 +27,10 @@ public class TargetController : MonoBehaviour
 
     private bool isDying = false;
 
+    // Pitch modification
+    private static float currentPitch = 1.0f;
+    private static float lastTapTime = 0f;
+
     private void Start()
     {
         StartCoroutine(SpawnAnimationRoutine());
@@ -62,8 +66,9 @@ public class TargetController : MonoBehaviour
     {
         Vector2 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
         Collider2D hitCollider = Physics2D.OverlapPoint(worldPos);
+        GameTimer timer = FindObjectOfType<GameTimer>();
 
-        if (hitCollider != null && hitCollider.gameObject == this.gameObject)
+        if (hitCollider != null && hitCollider.gameObject == this.gameObject&&timer.gameFinishFlag==false)
         {
             BreakTarget();
         }
@@ -84,8 +89,47 @@ public class TargetController : MonoBehaviour
 
         SpawnEffect();
         PlaySound();
+        SpawnFloatingText();
+
+        if (pointValue >= 30)
+        {
+            StartCoroutine(ShakeCamera(0.2f, 0.1f));
+        }
 
         StartCoroutine(ShrinkAndDestroyRoutine(TapDeathAnimDuration));
+    }
+
+    private void SpawnFloatingText()
+    {
+        GameObject ftPrefab = Resources.Load<GameObject>("FloatingTextPrefab");
+        if (ftPrefab != null)
+        {
+            GameObject ftObj = Instantiate(ftPrefab, transform.position, Quaternion.identity);
+            FloatingText ft = ftObj.GetComponent<FloatingText>();
+            if (ft != null)
+            {
+                ft.Setup(pointValue);
+            }
+        }
+    }
+
+    private System.Collections.IEnumerator ShakeCamera(float duration, float magnitude)
+    {
+        Vector3 originalPos = Camera.main.transform.localPosition;
+        float elapsed = 0.0f;
+
+        while (elapsed < duration)
+        {
+            float x = Random.Range(-1f, 1f) * magnitude;
+            float y = Random.Range(-1f, 1f) * magnitude;
+
+            Camera.main.transform.localPosition = new Vector3(x, y, originalPos.z);
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        Camera.main.transform.localPosition = originalPos;
     }
 
     /// <summary>
@@ -126,7 +170,25 @@ public class TargetController : MonoBehaviour
     {
         if (popSound != null)
         {
-            AudioSource.PlayClipAtPoint(popSound, Camera.main.transform.position);
+            if (Time.time - lastTapTime < 1.0f)
+            {
+                currentPitch = Mathf.Min(currentPitch + 0.1f, 2.0f);
+            }
+            else
+            {
+                currentPitch = 1.0f;
+            }
+            lastTapTime = Time.time;
+
+            GameObject audioObj = new GameObject("TempAudio");
+            audioObj.transform.position = Camera.main.transform.position;
+            AudioSource source = audioObj.AddComponent<AudioSource>();
+            
+            source.clip = popSound;
+            source.pitch = currentPitch;
+            source.Play();
+            
+            Destroy(audioObj, popSound.length);
         }
     }
 

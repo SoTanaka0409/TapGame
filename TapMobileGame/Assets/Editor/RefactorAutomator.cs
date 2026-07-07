@@ -32,16 +32,27 @@ public class RefactorAutomator
             }
             
             // プレハブを割り当て
-            GameObject ballPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Object/Ball/BallPrefab.prefab");
-            if (ballPrefab != null)
-            {
-                SerializedObject so = new SerializedObject(spawner);
-                so.Update();
-                var arrayProp = so.FindProperty("targetPrefabs");
-                arrayProp.arraySize = 1;
-                arrayProp.GetArrayElementAtIndex(0).objectReferenceValue = ballPrefab;
-                so.ApplyModifiedProperties();
-            }
+            GameObject ballPrefab1 = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Object/Ball/BallPrefab.prefab");
+            GameObject ballPrefab2 = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Object/Ball/BallPrefab 1.prefab");
+            GameObject ballPrefab3 = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Object/Ball/BallPrefab 2.prefab");
+
+            SerializedObject so = new SerializedObject(spawner);
+            so.Update();
+            var arrayProp = so.FindProperty("targetPrefabs");
+            
+            int count = 0;
+            if (ballPrefab1 != null) count++;
+            if (ballPrefab2 != null) count++;
+            if (ballPrefab3 != null) count++;
+            
+            arrayProp.arraySize = count;
+            
+            int idx = 0;
+            if (ballPrefab1 != null) arrayProp.GetArrayElementAtIndex(idx++).objectReferenceValue = ballPrefab1;
+            if (ballPrefab2 != null) arrayProp.GetArrayElementAtIndex(idx++).objectReferenceValue = ballPrefab2;
+            if (ballPrefab3 != null) arrayProp.GetArrayElementAtIndex(idx++).objectReferenceValue = ballPrefab3;
+            
+            so.ApplyModifiedProperties();
         }
         EditorSceneManager.MarkSceneDirty(gameScene);
         EditorSceneManager.SaveScene(gameScene);
