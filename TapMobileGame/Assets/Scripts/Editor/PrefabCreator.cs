@@ -7,10 +7,10 @@ public class PrefabCreator : EditorWindow
     [MenuItem("Tools/✨メリハリ演出用プレハブを生成✨")]
     public static void CreateFloatingTextPrefab()
     {
-        string path = "Assets/Resources/FloatingTextPrefab.prefab";
+        string path = "Assets/Resources/prefab_floating_text.prefab";
 
-        // Create GameObject
-        GameObject obj = new GameObject("FloatingTextPrefab");
+        // 空のGameObjectを作成
+        GameObject obj = new GameObject("prefab_floating_text");
         
         // Add components
         TextMeshPro tmpro = obj.AddComponent<TextMeshPro>();
@@ -37,6 +37,6 @@ public class PrefabCreator : EditorWindow
         PrefabUtility.SaveAsPrefabAsset(obj, path);
         DestroyImmediate(obj);
 
-        Debug.Log("FloatingTextPrefab を生成しました！: " + path);
+        Debug.Log("prefab_floating_text を生成しました！: " + path);
     }
 }

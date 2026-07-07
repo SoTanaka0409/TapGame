@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5764540095212263746}
   - component: {fileID: 6919821676290385177}
   m_Layer: 0
-  m_Name: ButtonEffect
+  m_Name: prefab_effect_button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

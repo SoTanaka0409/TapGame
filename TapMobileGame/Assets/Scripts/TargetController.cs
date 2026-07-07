@@ -68,7 +68,7 @@ public class TargetController : MonoBehaviour
         Collider2D hitCollider = Physics2D.OverlapPoint(worldPos);
         GameTimer timer = FindObjectOfType<GameTimer>();
 
-        if (hitCollider != null && hitCollider.gameObject == this.gameObject&&timer.gameFinishFlag==false)
+        if (hitCollider != null && hitCollider.gameObject == this.gameObject && timer.IsGameFinished == false)
         {
             BreakTarget();
         }
@@ -81,10 +81,10 @@ public class TargetController : MonoBehaviour
     {
         isDying = true;
 
-        ScoreManager sm = FindObjectOfType<ScoreManager>();
-        if (sm != null)
+        ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+        if (scoreManager != null)
         {
-            sm.AddScore(pointValue);
+            scoreManager.AddScore(pointValue);
         }
 
         SpawnEffect();
@@ -101,14 +101,14 @@ public class TargetController : MonoBehaviour
 
     private void SpawnFloatingText()
     {
-        GameObject ftPrefab = Resources.Load<GameObject>("FloatingTextPrefab");
-        if (ftPrefab != null)
+        GameObject floatingTextPrefab = Resources.Load<GameObject>("prefab_floating_text");
+        if (floatingTextPrefab != null)
         {
-            GameObject ftObj = Instantiate(ftPrefab, transform.position, Quaternion.identity);
-            FloatingText ft = ftObj.GetComponent<FloatingText>();
-            if (ft != null)
+            GameObject floatingTextObj = Instantiate(floatingTextPrefab, transform.position, Quaternion.identity);
+            FloatingText floatingText = floatingTextObj.GetComponent<FloatingText>();
+            if (floatingText != null)
             {
-                ft.Setup(pointValue);
+                floatingText.Setup(pointValue);
             }
         }
     }
@@ -140,12 +140,12 @@ public class TargetController : MonoBehaviour
         if (effectPrefab == null) return;
 
         GameObject effect = Instantiate(effectPrefab, transform.position, Quaternion.identity);
-        ParticleSystem ps = effect.GetComponent<ParticleSystem>();
+        ParticleSystem particleSystem = effect.GetComponent<ParticleSystem>();
         GameTimer timer = FindObjectOfType<GameTimer>();
 
-        if (ps != null && timer != null)
+        if (particleSystem != null && timer != null)
         {
-            var main = ps.main;
+            var main = particleSystem.main;
             if (timer.CurrentTimeLimit <= WarningTimeThreshold)
             {
                 main.startColor = Color.red;

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7298156839002709194}
   - component: {fileID: 3406836068025469993}
   m_Layer: 0
-  m_Name: PopEffect
+  m_Name: prefab_effect_pop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

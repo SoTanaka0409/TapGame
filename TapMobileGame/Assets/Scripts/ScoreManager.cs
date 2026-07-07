@@ -28,9 +28,9 @@ public class ScoreManager : MonoBehaviour
         GameTimer timer = FindObjectOfType<GameTimer>();
         if(timer != null )
         {
-            if (timer.gameFinishFlag == true)
+            if (timer.IsGameFinished == true)
             {
-                return;//timerg過ぎたら加点をなくす
+                return;//timerが過ぎたら加点をなくす
             }
         }
         CurrentScore += amount;

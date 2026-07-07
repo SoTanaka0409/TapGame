@@ -15,7 +15,7 @@ public class GameTimer : MonoBehaviour
     [SerializeField, Tooltip("タイマーが赤く点滅し始める残り時間（秒）")]
     private float warningTimeThreshold = 10.0f;
 
-    public bool gameFinishFlag=false;
+    public bool IsGameFinished { get; private set; } = false;
 
     /// <summary>
     /// 現在の残り時間を外部から取得するためのプロパティ
@@ -63,18 +63,18 @@ public class GameTimer : MonoBehaviour
     private void EndGame()
     {
         isEnded = true;
-        gameFinishFlag = true;
-        ScoreManager sm = FindObjectOfType<ScoreManager>();
-        if (sm != null)
+        IsGameFinished = true;
+        ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+        if (scoreManager != null)
         {
-            PlayerPrefs.SetInt("FinalScore", sm.CurrentScore);
+            PlayerPrefs.SetInt("FinalScore", scoreManager.CurrentScore);
             PlayerPrefs.Save();
         }
 
-        FadeController fade = FindObjectOfType<FadeController>();
-        if (fade != null) 
+        FadeController fadeController = FindObjectOfType<FadeController>();
+        if (fadeController != null) 
         {
-            fade.FadeOutAndLoad("Result");
+            fadeController.FadeOutAndLoad("Result");
         }
         else 
         {

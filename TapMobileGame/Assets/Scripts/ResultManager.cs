@@ -34,11 +34,11 @@ public class ResultManager : MonoBehaviour
         {
             time += Time.deltaTime;
             int current = Mathf.FloorToInt(Mathf.Lerp(0, finalScore, time / duration));
-            finalScoreText.text = $"最終スコア:\n{current} 点";
+            finalScoreText.text = $"Final Score:\n{current} pts";
             yield return null;
         }
 
-        finalScoreText.text = $"最終スコア:\n{finalScore} 点";
+        finalScoreText.text = $"Final Score:\n{finalScore} pts";
     }
 
     /// <summary>
@@ -60,10 +60,10 @@ public class ResultManager : MonoBehaviour
             Instantiate(clickEffectPrefab, worldPos, Quaternion.identity);
         }
 
-        FadeController fade = FindObjectOfType<FadeController>();
-        if (fade != null) 
+        FadeController fadeController = FindObjectOfType<FadeController>();
+        if (fadeController != null) 
         {
-            fade.FadeOutAndLoad("Title");
+            fadeController.FadeOutAndLoad("Title");
         }
         else 
         {

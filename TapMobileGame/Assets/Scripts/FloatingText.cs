@@ -22,9 +22,9 @@ public class FloatingText : MonoBehaviour
         
         if (textComponent != null)
         {
-            Color c = textComponent.color;
-            c.a -= (1.0f / lifetime) * Time.deltaTime;
-            textComponent.color = c;
+            Color currentColor = textComponent.color;
+            currentColor.a -= (1.0f / lifetime) * Time.deltaTime;
+            textComponent.color = currentColor;
         }
     }
 
