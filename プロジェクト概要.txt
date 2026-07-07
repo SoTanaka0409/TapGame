@@ -1,0 +1,7 @@
+ゲームタイトル：TapMobileGame (※正式なタイトルがあれば変更してください)
+使用プログラミング言語：C#
+Unityバージョン：2022.3.62f3
+素材のサイト：
+・画像：Unity標準アセット（Standard 2D Sprites）
+・効果音：効果音ラボ
+・BGM：AI（Gemini）による生成楽曲
