@@ -374,7 +374,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u3082\u3046\u4E00\u5EA6\u904A\u3076"
+  m_Text: Retry
 --- !u!222 &669180625
 CanvasRenderer:
   m_ObjectHideFlags: 0
